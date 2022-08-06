@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -ex
+
+# This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+
+#The first argument is time series name which is either MG or Lorenz.
+#The second argument is the experiment number 1.1 , 1.2 , 2.1  or 2.2
+#The third argument is the experiments repeat number i.e 1 or 2 ... 30 ...
+
+#Mackey-Glass Experiment 1.1
+python -u "main.py"  MG 1.1  1
+
+#Mackey-Glass Experiment 1.2
+python -u "main.py"  MG 1.2  1
+
+#Mackey-Glass Experiment 2.1
+python -u "main.py"  MG 2.1  1
+
+#Mackey-Glass Experiment 2.2
+python -u "main.py"  MG 2.2  1
+
