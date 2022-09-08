@@ -18,17 +18,14 @@ class testing(object):
         self.train_object = train_object
         
     # firing strengths of each input to each antecedent     
-    def generate_firing_strengths(self, advaced_NSFLSs, my_technique, time_series_name, est_past_points):
+    def generate_firing_strengths(self, advaced_NSFLSs, my_technique, nf_sigma, est_past_points):
         
         self.all_firing_strengts = np.empty([len(self.test_data), len(self.train_object.antecedents)])
         self.all_firing_strengts2 = np.empty([len(self.test_data), len(self.train_object.antecedents)])
         self.all_firing_strengts.fill(np.NaN)
 
         #Defining non-adaptive sigma values
-        if time_series_name=="MG":
-            sigmas=[0.0,0.0286982683,0.0907518928,0.2869826834]
-        elif time_series_name=="Lorenz":
-            sigmas=[0.0,0.7527255978, 2.3803273421,7.5272559778]
+        sigmas = [0.0, nf_sigma/10, nf_sigma/(10**0.5), nf_sigma]
     
         #Non-Adaptive manually adjusting the sigma value of the input MFs
         if(my_technique=="singleton"):
@@ -150,9 +147,8 @@ class testing(object):
             return 0
         
         degree = []
-        print(self.train_object.antecedents.keys())
+        #print(self.train_object.antecedents.keys())
         try:
-            # here question: interval
             disc_of_all = np.linspace(self.train_object.antecedents[list(self.train_object.antecedents.keys())[0]].interval[0],\
                                   self.train_object.antecedents[list(self.train_object.antecedents.keys())[-1]].interval[1],\
                                       int((500 / 2.0) * (len(self.train_object.antecedents) + 1)))
